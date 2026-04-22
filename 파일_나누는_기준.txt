@@ -1,0 +1,24 @@
+
+
+
+
+📦 src > components
+👉🏻 재사용되는 UI 조각
+Header
+ProductCard
+Button
+Modal
+
+📄 src > pages
+👉🏻 라우터로 이동하는 화면
+/
+-> Home.jsx
+
+/product/1
+-> ProductDetail.jsx
+
+/cart
+-> Cart.jsx
+
+
+
