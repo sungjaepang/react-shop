@@ -9,6 +9,10 @@
 /* 8단계 CSS 추가 7 - 정렬 기능 */
 /* 9단계 CSS 추가 8 - 스켈레톤 로딩 UI */
 /* 10단계 CSS 추가 9 - 에러 UI 처리 */
+/* 13단계 CSS 추가 10 - 찜하기 Wishlist 기능 */
+/* 14단계 CSS 추가 11 - 상품 상세 페이지에도 찜하기 버튼 추가 */
+/* 16단계 CSS 추가 12 - 다크모드 theme 적용 */
+/* */
 /* */
 
 /* 
@@ -476,6 +480,130 @@ a {
 }
 
 /* -------------------------  ------------------------- */
+/* 260605 10차 - 13단계 찜하기 Wishlist 기능 */
+.product-card {
+  position: relative;
+}
+
+.wishlist-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #aaa;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.wishlist-button.active {
+  color: #ff3b30;
+}
+
+
+
+/* -------------------------  ------------------------- */
+/* 260605 11차 - 14단계 상품 상세 페이지에도 찜하기 버튼 추가 */
+.product-action-buttons {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.product-action-buttons .cart-button {
+  margin-top: 0;
+}
+
+.detail-wishlist-button {
+  padding: 16px 28px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.detail-wishlist-button.active {
+  border-color: #ff3b30;
+  color: #ff3b30;
+}
+
+
+
+/* -------------------------  ------------------------- */
+/* 260605 12차 - 16단계 다크모드 theme 적용 */
+.app {
+  min-height: 100vh;
+  background: #fff;
+  color: #111;
+}
+
+.app.dark {
+  background: #111;
+  color: #f5f5f7;
+}
+
+.app.dark .site-header {
+  background: rgba(17, 17, 17, 0.86);
+}
+
+.app.dark .logo,
+.app.dark .site-nav a {
+  color: #f5f5f7;
+}
+
+.app.dark .product-card,
+.app.dark .detail-wishlist-button,
+.app.dark .search-input,
+.app.dark .sort-select {
+  background: #1c1c1e;
+  color: #f5f5f7;
+  border-color: #333;
+}
+
+.app.dark .product-image-box,
+.app.dark .product-detail-image,
+.app.dark .cart-item,
+.app.dark .error-box,
+.app.dark .category-tabs button {
+  background: #1c1c1e;
+}
+
+.app.dark .category-tabs button.active {
+  background: #f5f5f7;
+  color: #111;
+}
+
+.app.dark .product-category,
+.app.dark .product-detail-desc,
+.app.dark .empty-result {
+  color: #aaa;
+}
+
+.theme-button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.app.dark .theme-button {
+  background: #f5f5f7;
+  color: #111;
+}
+
+/* -------------------------  ------------------------- */
+/* -------------------------  ------------------------- */
 
 
 /* ------------------------- 반응형 ------------------------- */
@@ -545,6 +673,18 @@ a {
   .site-header {
     padding: 0 20px;
   }
+}
+
+@media (max-width: 480px) {
+  /* 260605 11차 - 14단계 상품 상세 페이지에도 찜하기 버튼 추가 */
+  .product-action-buttons {
+    flex-direction: column;
+  }
+
+  .product-action-buttons button {
+    width: 100%;
+  }
+
 }
 
 

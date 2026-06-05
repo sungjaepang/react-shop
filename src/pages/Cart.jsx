@@ -2,9 +2,12 @@
 
 /* 4단계 Zustand로 장바구니 상태관리 - 4. 장바구니 페이지 만들기 */
 /* 6단계 localStorage 저장 - 3. 수정 */
+/* 12단계 Toast 알림 추가 */
 /* */
 
 import { useCartStore } from "../store/cartStore";
+// 12단계
+import toast from "react-hot-toast";
 
 function Cart() {
   const cartItems = useCartStore((state) => state.cartItems);
@@ -50,8 +53,8 @@ function Cart() {
                 </button>
               </div> {/* 6단계 */}
             </div>
-
-            <button type="button" onClick={() => removeFromCart(item.id)}>
+                                                  {/* 12단계 */}
+            <button type="button" onClick={() => { removeFromCart(item.id); toast("상품이 삭제되었습니다."); }}>
               Remove
             </button>
           </div>
@@ -60,7 +63,8 @@ function Cart() {
 
       <div className="cart-summary">
         <strong>Total: ${totalPrice.toFixed(2)}</strong>
-        <button type="button" onClick={clearCart}>
+        {/* <button type="button" onClick={clearCart}> */} {/* 12단계 */}
+        <button type="button" onClick={() => { clearCart(); toast("장바구니를 비웠습니다."); }}>
           Clear Cart
         </button>
       </div>
