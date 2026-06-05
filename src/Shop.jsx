@@ -10,10 +10,13 @@
 /* 8단계 정렬 기능 - 4. 상품 출력 부분 수정 */
 /* 9단계 스켈레톤 로딩 UI - import 추가 + 3. loading 부분 수정 */
 /* 10단계 에러 UI 처리 - error 상태 추가 */
+/* 11단계 TanStack Query 적용 (API 로직 실무형) */
 /*  */
 
 
-import { useEffect, useState } from "react";
+import { /* useEffect, 11단계 */ useState } from "react";
+  /* 11단계 */
+  import { useQuery } from "@tanstack/react-query"; 
 import { getProducts } from "../api/products";
 // 2단계?
 import ProductCard from "../components/ProductCard";
@@ -21,15 +24,28 @@ import ProductCard from "../components/ProductCard";
 import ProductSkeleton from "../components/ProductSkeleton";
 
 function Shop() {
+  /* 11단계
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); 
+    */
+   const {
+    data: products = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  }); /* 11단계 */
+
   // 7단계
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchKeyword, setSearchKeyword] = useState("");
   // 8단계 정렬 상태 추가
   const [sortOption, setSortOption] = useState("default");
   // 10단계
-  const [error, setError] = useState(null);
+  /* 11단계에서 이 부분도 제거 + useEffect 제거
+    const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -46,7 +62,7 @@ function Shop() {
     };
 
     fetchProducts();
-  }, []);
+  }, []); */
 
   // 7단계 검색기능+카테고리 필터
   const categories = [
@@ -68,20 +84,24 @@ function Shop() {
 
   // 8단계 정렬기능
   const sortedProducts = [...filteredProducts].sort((a, b) => {
-  if (sortOption === "price-low") {
-    return a.price - b.price;
-  }
+    if (sortOption === "price-low") { 
+      return a.price - b.price;
+    }
 
-  if (sortOption === "price-high") {
-    return b.price - a.price;
-  }
+    if (sortOption === "price-high") {
+      return b.price - a.price;
+    }
 
-  if (sortOption === "name") {
-    return a.title.localeCompare(b.title);
-  }
+    if (sortOption === "name") {
+      return a.title.localeCompare(b.title);
+    }
+  /* return문에서 중괄호 {} 축약 가능
+  if (sortOption === "price-low") return a.price - b.price;
+  if (sortOption === "price-high") return b.price - a.price;
+  if (sortOption === "name") return a.title.localeCompare(b.title); */
 
-  return 0;
-}); /* 8단계 */ 
+    return 0;
+  }); /* 8단계 */ 
 
   // 9단계 - 이 부분 삭제 후, 아래 return문 내부 처리로 변경.
   // if (loading) return <p>Loading...</p>;
@@ -134,17 +154,22 @@ function Shop() {
       
 
     {/* 9단계 */}
-    {loading ? (
+    {/* {loading ? ( */}
+    {/* 11단계 */}
+    {isLoading ? (
       <div className="product-grid">
         {Array.from({ length: 8 }).map((_, index) => (
           <ProductSkeleton key={index} />
         ))}
       </div>
-    ) /* 10단계 */ : error ? (
+    ) /* 10단계 */ /* 11단계 : error ? (
+    )  */ : isError ? (
       <div className="error-box">
         <h3>문제가 발생했습니다.</h3>
-        <p>{error}</p>
-        <button type="button" onClick={() => window.location.reload()}>
+        {/* 11단계 <p>{error}</p> */}
+          <p>상품 데이터를 불러오지 못했습니다.</p>
+        {/* 11단계 <button type="button" onClick={() => window.location.reload()}> */}
+        <button type="button" onClick={() => refetch()}>
           다시 시도
         </button>
       </div>
@@ -157,7 +182,8 @@ sortedProducts.length === 0 ? ( /* 8단계 */
       ) : (
         // 2단계
       <div className="product-grid">
-        {products.map((product) => (
+        {/* 11단계 {products.map((product) => ( */}
+        {sortedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

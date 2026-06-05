@@ -2,12 +2,14 @@
 
 /* 3단계 상품 상세 페이지 연결 - 1. 상세 페이지 파일 만들기. */
 /* 4단계 Zustand로 장바구니 상태관리 - 3. 상세 페이지 버튼에 연결 */
+/* 11단계 TanStack Query 적용 (API 로직 실무형) */
 /*  */
 /*  */
 
-import { useEffect, useState } from "react";
+/* 11단계 import { useEffect, useState } from "react"; */
 // import products from "../data/products"
 import { useParams } from "react-router-dom"
+  /* 11단계 */ import { useQuery } from "@tanstack/react-query";
 import { getProduct } from "../api/products";
 // 
 import { useCartStore } from "../store/cartStore";
@@ -15,9 +17,20 @@ import { useCartStore } from "../store/cartStore";
 function ProductDetail() { // { cart, setCart }
   const { id } = useParams();
   // const product = products.find((item) => item.id === Number(id))
+/* 11단계  
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); */
   const addToCart = useCartStore((state) => state.addToCart);
+
+  const {
+    data: product,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => getProduct(id),
+  });
 
   // if (!product) {
   //   return <div className="not-found">상품을 찾을 수 없습니다.</div>
@@ -47,6 +60,7 @@ function ProductDetail() { // { cart, setCart }
   //   </section>
   // )
 
+/* 11단계
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -60,10 +74,26 @@ function ProductDetail() { // { cart, setCart }
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id]); */
 
-  if (loading) return <p>Loading...</p>;
-  if (!product) return <p>상품을 찾을 수 없습니다.</p>;
+  /* 11단계
+  if (loading) return <p>Loading...</p>; */
+  if (isLoading) return <p className="empty-result">Loading...</p>;
+
+  if (isError) {
+    return (
+      <div className="error-box">
+        <h3>문제가 발생했습니다.</h3>
+        <p>상품 상세 정보를 불러오지 못했습니다.</p>
+        <button type="button" onClick={() => refetch()}>
+          다시 시도
+        </button>
+      </div>
+    );
+  }
+
+  if (!product) return <p className="empty-result">상품을 찾을 수 없습니다.</p>;
+  // if (!product) return <p>상품을 찾을 수 없습니다.</p>;
 
   return (
     <section className="product-detail">
@@ -77,9 +107,7 @@ function ProductDetail() { // { cart, setCart }
         <p className="product-detail-price">${product.price}</p>
         <p className="product-detail-desc">{product.description}</p>
 
-        <button type="button" className="cart-button" onClick={() => addToCart(product)}>
-          Add to Cart
-        </button>
+        <button type="button" className="cart-button" onClick={() => addToCart(product)}> Add to Cart </button>
       </div>
     </section>
   );
