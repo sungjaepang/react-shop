@@ -1,21 +1,11 @@
+/* 260603 front프로젝트 시작 */
 
+/*  -  */
 
-/* 26.03.13 .start */
-.product-list {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-  padding:40px;
-}
-
-.product-card img {
-  width:100%;
-}
-
-.product-card {
-  cursor:pointer;
-}
-/* 26.03.13 .end */
+/* 
+  1. App.css - 스타일 추가는 우선적으로 여기
+  2. index.css - primary 스타일은 여기
+*/
 
 
 
