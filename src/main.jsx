@@ -8,7 +8,6 @@
 /*  */
 
 
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
@@ -17,7 +16,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // 12단계
 import { Toaster } from "react-hot-toast";
 import App from './App.jsx';
-// import './index.css'
+
+import './index.css';
+import './App.css';
+
 
 // 11단계
 const queryClient = new QueryClient();

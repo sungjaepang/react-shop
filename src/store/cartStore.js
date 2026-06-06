@@ -17,6 +17,7 @@ export const useCartStore = create(
 
   addToCart: (product) =>
     set((state) => {
+      // 중복 상품 검사
       const existingItem = state.cartItems.find(
         (item) => item.id === product.id
       );
@@ -54,7 +55,7 @@ export const useCartStore = create(
                 ? { ...item, quantity: item.quantity - 1 }
                 : item
             )
-            .filter((item) => item.quantity > 0),
+            .filter((item) => item.quantity > 0), // 수량 0 되면 자동 삭제
         })),
     /* ----------------------- */
 
@@ -62,6 +63,11 @@ export const useCartStore = create(
         set((state) => ({
         cartItems: state.cartItems.filter((item) => item.id !== id),
     })),
+
+    // selector 함수. 가끔 이렇게 만듬. 지금은 필요없어서 일단 패스.
+    // getTotalPrice: () => {
+      
+    // }
 
   clearCart: () => set({ cartItems: [] }),
 })//

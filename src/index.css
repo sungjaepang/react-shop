@@ -11,6 +11,41 @@
 
 
 
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  background: #fff;
+  color: #111;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+
+
+
+/* 
+  기존 Vite 기본 스타일 보관용.
+  현재 react-shop 레이아웃과 충돌해서 임시 비활성화.
+  
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -122,3 +157,4 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+ */

@@ -57,7 +57,8 @@ function ProductCard({ product }) {
         className={`wishlist-button ${isWishlisted ? "active" : ""}`}
         onClick={handleWishlist}
       >
-        ♥♥️
+        ♥
+        {/* {isWishlisted ? "♥" : "♡"} */}
       </button> {/* 13단계 */}
 
       <div className="product-image-box">

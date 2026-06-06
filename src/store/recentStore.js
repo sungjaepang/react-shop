@@ -14,12 +14,15 @@ export const useRecentStore = create(
 
       addRecentItem: (product) =>
         set((state) => {
-          const filteredItems = state.recentItems.filter(
+          const filteredItems = state.recentItems.filter( // 기존 제거
             (item) => item.id !== product.id
           );
 
           return {
             recentItems: [product, ...filteredItems].slice(0, 6),
+                                                    // 최대 개수 제한
+                /* 무한히 저장되면 UX와 localStorage 효율이 떨어질 수 있음.
+                    최근 조회 상품 개수를 제한하는게 좋음. */
           };
         }),
     }),

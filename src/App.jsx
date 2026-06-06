@@ -16,15 +16,18 @@
 */
 
 import { Routes, Route } from "react-router-dom";
-// import './App.css'
-// import Home from "./pages/Home"
+
+/*  기존 Home은 학습 기록용으로 보존
+    import Home from "./pages/Home"; */
+
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
-/* */ import Cart from './pages/Cart';
-/* */ import Header from "./components/Header";
-/* 13단계 */ import Wishlist from "./pages/Wishlist";
-/* 15단계 */ import RecentlyViewed from "./pages/RecentlyViewed";
-/* 16단계 */ import { useThemeStore } from "./store/themeStore";
+import Cart from './pages/Cart'; /* */ 
+import Header from "./components/Header"; /* */ 
+import Wishlist from "./pages/Wishlist"; /* 13단계 */ 
+import RecentlyViewed from "./pages/RecentlyViewed"; /* 15단계 */ 
+import { useThemeStore } from "./store/themeStore"; /* 16단계 */ 
+
 
 function App() {
   // const [cart, setCart] = useState(() => {
@@ -32,31 +35,35 @@ function App() {
   //   return savedCart ? JSON.parse(savedCart) : []
   // })
 
-  /* 16단계 */ const theme = useThemeStore((state) => state.theme); 
+  const theme = useThemeStore((state) => state.theme); /* 16단계 */ 
 
   // useEffect(() => {
   //   localStorage.setItem("cart", JSON.stringify(cart))
   // }, [cart])
 
   return (
-    /* 16단계 */ 
-    <div className={`app ${theme}`}>
+    <div className={`app ${theme}`}> {/* 16단계 */}
     {/* // <BrowserRouter> */}
       <Header />
       {/* <Header cart={cart} /> */}
 
       <Routes>
+        {/* 기존 정적 Home 버전 */}
         {/* <Route path="/" element={<Home />} /> */}
+
+        {/* 현재 실무형 API 기반 메인 페이지 */}
         <Route path="/" element={<Shop />} />
-        <Route path="/product/:id" element={<ProductDetail />} 
-          // element={<ProductDetail cart={cart} setCart={setCart} />}
-        />
+
+        {/* 기존: /product/:id */}
+        {/* <Route path="/product/:id" element={<ProductDetail />} /> */}
+
+        {/* 현재 ProductCard 링크와 맞춘 경로 */}
+        <Route path="/products/:id" element={<ProductDetail />} />
+
         {/* <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} /> */}
         <Route path="/cart" element={<Cart />} />
-        
-        {/* 13단계 */} <Route path="/wishlist" element={<Wishlist />} />
-
-        {/* 15단계 */} <Route path="/recent" element={<RecentlyViewed />} />
+        <Route path="/wishlist" element={<Wishlist />} /> {/* 13단계 */}
+        <Route path="/recent" element={<RecentlyViewed />} /> {/* 15단계 */}
       </Routes>
     {/* // </BrowserRouter> */}
     </div>

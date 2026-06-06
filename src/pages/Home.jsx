@@ -2,6 +2,22 @@ import products from "../data/products"
 import ProductCard from "../components/ProductCard"
 import { Link } from "react-router-dom"
 
+
+/*
+========================================
+LEGACY VERSION
+
+초기 React Shop 버전
+정적 데이터 기반
+
+현재는 Shop.jsx(API 버전) 사용중
+
+보관용 파일
+========================================
+*/
+
+
+
 function Home() {
   return (
     <main className="home-page">
@@ -32,4 +48,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Home; 

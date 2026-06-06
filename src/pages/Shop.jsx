@@ -117,27 +117,28 @@ function Shop() {
         </div>
 
 {/* 8단계 */}
-<div className="shop-controls">
-        <input
-          type="text"
-          placeholder="Search products"
-          value={searchKeyword}
-          onChange={(e) => setSearchKeyword(e.target.value)}
-          className="search-input"
-        />
-      </div> 
+        <div className="shop-controls">
+          <input type="text" placeholder="Search products" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} className="search-input"/>
 
-      <select
-        value={sortOption}
-        onChange={(e) => setSortOption(e.target.value)}
-        className="sort-select"
-      >
-        <option value="default">Default</option>
-        <option value="price-low">Price: Low to High</option>
-        <option value="price-high">Price: High to Low</option>
-        <option value="name">Name</option>
-      </select>
-</div> {/* 8단계 */}
+          <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="sort-select">
+            <option value="default">Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name</option>
+            <option value="kor-default">기본순</option>
+            <option value="kor-price-low">낮은 가격 순</option>
+            <option value="kor-price-high">높은 가격 순</option>
+            <option value="kor-name">이름</option>
+            <option value="kor-">추천순</option>
+            <option value="kor-">신상품순</option>
+            <option value="kor-">리뷰많은순</option>
+            <option value="kor-">높은할인순</option>
+            <option value="kor-">좋아요많은순</option>
+            <option value="kor-">판매순</option>
+            <option value="kor-">후기순</option>
+          </select>
+        </div> {/* 8단계 */}
+      </div> 
       
       <div className="category-tabs">
         {categories.map((category) => (

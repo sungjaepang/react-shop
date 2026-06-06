@@ -8,8 +8,10 @@
 
 import { Link } from "react-router-dom";
 import { useCartStore } from "../store/cartStore";
-/* 13단계 */ import { useWishlistStore } from "../store/wishlistStore";
-/* 16단계 */ import { useThemeStore } from "../store/themeStore";
+/* 13단계 */ 
+import { useWishlistStore } from "../store/wishlistStore";
+/* 16단계 */ 
+import { useThemeStore } from "../store/themeStore";
 
 // function Header({ cart }) {
 //   return (
@@ -28,12 +30,10 @@ import { useCartStore } from "../store/cartStore";
 function Header() {
   const cartItems = useCartStore((state) => state.cartItems);
 
-  const cartCount = cartItems.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  /* 13단계 */ const wishlistItems = useWishlistStore((state) => state.wishlistItems);
+  /* 13단계 */ 
+  const wishlistItems = useWishlistStore((state) => state.wishlistItems);
 
   /* 16단계 */
   const theme = useThemeStore((state) => state.theme);
@@ -53,19 +53,20 @@ function Header() {
           {cartCount > 0 && <span>{cartCount}</span>}
         </Link>
 
+        {/* 13단계 */}
+        <Link to="/wishlist" className="cart-link">
+          Wishlist
+          {wishlistItems.length > 0 && <span>{wishlistItems.length}</span>}
+        </Link>
+
+        {/* 15단계 */} <Link to="/recent">Recent</Link>
+
         {/* 16단계 */}
         <button type="button" className="theme-button" onClick={toggleTheme}>
           {theme === "light" ? "Dark" : "Light"}
         </button> {/*16단계*/}
+
       </nav>
-
-      {/* 13단계 */}
-      <Link to="/wishlist" className="cart-link">
-        Wishlist
-        {wishlistItems.length > 0 && <span>{wishlistItems.length}</span>}
-      </Link>
-
-      {/* 15단계 */} <Link to="/recent">Recent</Link>
 
     </header>
   );
